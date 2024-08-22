@@ -15,10 +15,10 @@
         <!-- user form -->
         <div style="padding-bottom: 2rem;">
             <h2>Employee</h2>
-            <form>
+            <form id="emp-form">
                 <label>
                     First name
-                    <input type="text" name="first_name" placeholder="First name" />
+                    <input type="text" name="first_name" placeholder="First name" id="emp-name" />
                 </label>
 
                 <label>
@@ -42,11 +42,11 @@
                 </label>
 
                 <label style="padding-bottom: 1rem;">
-                    <input name="terms" type="checkbox" role="switch" />
-                    Union Member
+                    <input name="union" type="checkbox" role="switch" />
+                    Union member
                 </label>
               
-                <button type="submit">Submit</button>
+                <button type="submit" id="submit-employee">Submit</button>
               </form>
         </div>
 
@@ -81,12 +81,14 @@
 
                 <label style="padding-bottom: 1rem;">
                     <input name="certification" type="checkbox" role="switch" />
-                    Certification Required to operate
+                    Certification required to operate
                 </label>
               
-                <button type="submit">Submit</button>
+                <button type="submit" id="submit-asset">Submit</button>
               </form>
         </div>
     </main>
 </body>
+
+<script src="main.js"></script>
 </html>
