@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@2/css/pico.blue.min.css"
+>
+    <title>4insite | Take-home</title>
+</head>
+<body>
+    <main class="container">
+        <h1>Create Employees and Assets</h1>
+        <p>(see the <code>README</code>)</p>
+
+        <!-- user form -->
+        <div style="padding-bottom: 2rem;">
+            <h2>User</h2>
+            <form>
+                <label>
+                    First name
+                    <input type="text" name="first_name" placeholder="First name" />
+                </label>
+
+                <label>
+                    Last name
+                    <input type="text" name="last_name" placeholder="Last name" />
+                </label>
+
+                <label>
+                    Email
+                    <input type="email" name="email" placeholder="Email" />
+                </label>
+
+                <label>
+                    Telephone
+                    <input type="tel" name="telephone" placeholder="Telephone" />
+                </label>
+
+                <label>
+                    Bio
+                    <textarea name="bio" placeholder="Write a professional short bio" aria-label="Professional short bio"></textarea>
+                </label>
+
+                <label style="padding-bottom: 1rem;">
+                    <input name="terms" type="checkbox" role="switch" />
+                    Union Member
+                </label>
+              
+                <button type="submit">Submit</button>
+              </form>
+        </div>
+
+        <!-- asset form -->
+        <div>
+            <h2>Asset</h2>
+            <form>
+                <label>
+                    Asset name
+                    <input type="text" name="asset_name" placeholder="Asset name" />
+                </label>
+
+                <label>
+                    Serial number
+                    <input type="text" name="serial_number" placeholder="Serial number" />
+                </label>
+
+                <label>
+                    Price
+                    <input type="number" name="price" placeholder="Price" />
+                </label>
+
+                <label>
+                    Color
+                    <input type="text" name="color" placeholder="Color" />
+                </label>
+
+                <label>
+                    Description
+                    <textarea name="bio" placeholder="Write a description of the asset" aria-label="Short description of asset"></textarea>
+                </label>
+
+                <label style="padding-bottom: 1rem;">
+                    <input name="certification" type="checkbox" role="switch" />
+                    Certification required
+                </label>
+              
+                <button type="submit">Submit</button>
+              </form>
+        </div>
+    </main>
+</body>
+</html>
