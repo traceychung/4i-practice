@@ -1,6 +1,9 @@
 # 4insite Backend Take-home Assignment
 _Employees and Assets to meet our client's Scope of Work_
 
+**Demo** on GitHub Pages:
+https://gloriousloaf.github.io/4i-take-home-backend/
+
 ## Description
 At 4insite, our software helps manage and empower a workforce of thousands around the world.
 
