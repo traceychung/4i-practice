@@ -15,7 +15,10 @@ Picture this code as the first draft of the "create" portion of the UI, built to
 
 ### MVP
 To pass this examination, meet these goals with clean, well written code and supporting evidence (see [Submission](#submission) below).
-- API to recieve all CRUD operations of a single Employee or Asset
+- Python/Django + PostgreSQL backend, built from scratch
+- Stick to the core Python and Django packages
+  - if you want to add extra requirements, please document them and your reason for using them
+- API to recieve all CRUD operations for two models: Employee and Asset
   - create single new items of a type
   - read all of a type, or one by `id`
   - update or delete one by `id`
@@ -24,8 +27,9 @@ To pass this examination, meet these goals with clean, well written code and sup
   - no auth required
 - Models to store all properties of these two different kinds of objects
   - must use appropriate data types per property
-  - **all properties** in current frontend code are required, stretch items are not
-- No frontend updates are necessary, only focus on crafting your backend code
+  - **all properties** in current frontend code are required, **except** for the `input:checkbox` props
+  - stretch items do not need to be accounted for unless they are fully implemented
+- No frontend updates are necessary, focus on crafting your backend code
 - A short `README` for your teammates to review.
   - this is a closed-source project and your team knows all the `env` reqs
   - just the facts, please
@@ -56,6 +60,6 @@ This evidence should include all forms of relevant CRUD operations functioning, 
 
 For **video** evidence, we don't need any fancy edits, and narration is optional. Just run the requests in Postman in a logical order and show the responses. Try to keep it under 5 minutes — the shorter the better, as long as it's legible.
 
-Embed all of these screenshots or recordings into the `README`. Remember, YouTube is a great, free way to host and embed videos. Email submissions of evidence are also acceptable — send those to the inbox of your contact at 4insite.
+Embed all of these screenshots or recordings into your `README`. Remember, YouTube is a great, free way to host and embed videos. Email submissions of evidence are also acceptable — send those to the inbox of your contact at 4insite.
 
 **Good luck,** you got this.
