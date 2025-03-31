@@ -4,63 +4,55 @@ from django.http import JsonResponse
 from .models import Employee
 import json
 from django.views.decorators.csrf import csrf_exempt
+from .serializers import employee_to_dict
 
-# View all
-@require_http_methods("GET")
+@csrf_exempt
+@require_http_methods(["GET", "POST"])
 def list_employees(request):
-    employees = Employee.objects.all()
-    data = list(employees.values())
-    return JsonResponse(data, safe=False)
-
-# Create new
-@csrf_exempt
-@require_http_methods("POST")
-def create_employees(request):
-    data = json.loads(request.body)
-    employee = Employee.objects.create(**data)
-    data = list(Employee.objects.values())
-    return JsonResponse(
-        data,
-        safe=False
-    )
-
-# Get by id
-@require_http_methods("GET")
-def get_employee(request, pk):
-    employee = Employee.objects.get(id=pk)
-    employee_data = {
-        'first_name': employee.first_name,
-        'last_name': employee.last_name,
-        'email': employee.email,
-        'phone': employee.phone,
-        'bio': employee.bio,
-        'union_member': employee.union_member
-    }
-    return JsonResponse(employee_data, safe=False)
-
-# Update
-@csrf_exempt
-@require_http_methods(["PUT", "DELETE"])
-def update_employees(request, pk):
-    if request.method == "PUT":
+    if request.method == "GET":
+        employees = Employee.objects.all()
+        data = list(employees.values())
+        return JsonResponse(data, safe=False, status=200)
+    else:
         data = json.loads(request.body)
-        Employee.objects.filter(id=pk).update(**data)
-        employee = Employee.objects.get(id=pk)
-        employee_data = {
-        'first_name': employee.first_name,
-        'last_name': employee.last_name,
-        'email': employee.email,
-        'phone': employee.phone,
-        'bio': employee.bio,
-        'union_member': employee.union_member
-    }
+        employee = Employee.objects.create(**data)
+        data = list(Employee.objects.values())
         return JsonResponse(
-                employee_data,
-                safe=False
-            )
-    elif request.method == "DELETE":
-        employee = Employee.objects.filter(id=pk).delete()
-        return JsonResponse(
-                {"message": "Employee was deleted"},
-                status=400,
-            )
+            data,
+            safe=False,
+            status=200
+        )
+
+@csrf_exempt
+@require_http_methods(["GET", "PUT", "DELETE"])
+def get_employee(request, pk):
+    if request.method == "GET":
+        try:
+            employee = Employee.objects.get(id=pk)
+            employee_data = employee_to_dict(employee)
+            return JsonResponse(employee_data, safe=False, status=200)
+        except:
+            return JsonResponse({"message": "ID not found"}, safe=False, status=404)
+    elif request.method == "PUT":
+        try:
+            data = json.loads(request.body)
+            Employee.objects.filter(id=pk).update(**data)
+            employee = Employee.objects.get(id=pk)
+            employee_data = employee_to_dict(employee)
+            return JsonResponse(
+                    employee_data,
+                    safe=False,
+                    status=200
+                )
+        except:
+            return JsonResponse({"message": "ID not found"}, safe=False, status=404)
+    else:
+        try:
+            employee = Employee.objects.get(id=pk)
+            Employee.objects.filter(id=pk).delete()
+            return JsonResponse(
+                    {"message": "Employee was deleted"},
+                    status=200,
+                )
+        except:
+            return JsonResponse({"message": "ID not found"}, safe=False, status=404)
