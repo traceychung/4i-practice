@@ -1,7 +1,4 @@
 from django.urls import path
 from . import views
 
-urlpatterns = [
-    path("", views.list_assets),
-    path("<int:pk>", views.get_asset)
-]
+urlpatterns = [path("", views.list_assets), path("<int:pk>", views.get_asset)]
