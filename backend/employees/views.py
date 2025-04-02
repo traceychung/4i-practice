@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from django.views.decorators.http import require_http_methods
-from django.http import JsonResponse
+from django.http import JsonResponse, HttpRequest
 from .models import Employee
 import json
 from django.views.decorators.csrf import csrf_exempt
@@ -9,7 +9,7 @@ from .serializers import employee_to_dict
 
 @csrf_exempt
 @require_http_methods(["GET", "POST"])
-def list_employees(request):
+def list_employees(request: HttpRequest):
     if request.method == "GET":
         employees = Employee.objects.all()
         data = list(employees.values())
@@ -17,13 +17,13 @@ def list_employees(request):
     else:
         data = json.loads(request.body)
         employee = Employee.objects.create(**data)
-        data = list(Employee.objects.values())
+        data = employee_to_dict(employee)
         return JsonResponse(data, safe=False, status=200)
 
 
 @csrf_exempt
 @require_http_methods(["GET", "PUT", "DELETE"])
-def get_employee(request, pk):
+def get_employee(request: HttpRequest, pk: int):
     if request.method == "GET":
         try:
             employee = Employee.objects.get(id=pk)

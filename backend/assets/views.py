@@ -1,29 +1,29 @@
 from django.shortcuts import render
 from django.views.decorators.http import require_http_methods
-from django.http import JsonResponse
+from django.http import JsonResponse, HttpRequest
 from .models import Asset
 import json
 from django.views.decorators.csrf import csrf_exempt
 from .serializers import asset_to_dict
 
-# Create your views here.
+
 @csrf_exempt
 @require_http_methods(["GET", "POST"])
-def list_assets(request):
+def list_assets(request: HttpRequest):
     if request.method == "GET":
         assets = Asset.objects.all()
-        data = list(Asset.objects.values())
+        data = list(assets.values())
         return JsonResponse(data, safe=False, status=200)
     else:
         data = json.loads(request.body)
         new_asset = Asset.objects.create(**data)
-        data = list(Asset.objects.values())
+        data = asset_to_dict(new_asset)
         return JsonResponse(data, safe=False, status=200)
 
 
 @csrf_exempt
 @require_http_methods(["GET", "PUT", "DELETE"])
-def get_asset(request, pk):
+def get_asset(request: HttpRequest, pk: int):
     if request.method == "GET":
         try:
             asset = Asset.objects.get(id=pk)
@@ -41,7 +41,7 @@ def get_asset(request, pk):
     elif request.method == "PUT":
         try:
             data = json.loads(request.body)
-            update_asset = Asset.objects.filter(id=pk).update(**data)
+            Asset.objects.filter(id=pk).update(**data)
             asset = Asset.objects.get(id=pk)
             data = asset_to_dict(asset)
             return JsonResponse(data, safe=False, status=200)
